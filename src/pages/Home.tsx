@@ -56,7 +56,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link to="/contact">
-                  <Button variant="outline" size="lg" className="!text-white !border-white hover:!bg-white hover:!text-primary-600">
+                  <Button variant="outline" size="lg" className="!text-white !border-white hover:!bg-white hover:!text-primary-600 !h-14">
                     Contact Us
                   </Button>
                 </Link>
@@ -218,54 +218,50 @@ export default function Home() {
       </section>
 
       {/* Schneider Electric Badge */}
-      <section className="section-padding bg-gradient-primary text-white">
+      <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
         <Container>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="text-white">
               <div className="inline-block px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-6">
                 Authorized Partner
               </div>
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
                 Schneider Electric System Integrator
               </h2>
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
+              <p className="text-xl mb-8 leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                 As an authorized Schneider Electric System Integrator, we deliver world-class automation and electrical solutions backed by global standards and local expertise.
               </p>
               <ul className="space-y-4">
-                {[
-                  'Certified technical expertise',
-                  'Genuine Schneider products',
-                  'Complete system integration',
-                  'Lifetime technical support'
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center space-x-3">
-                    <CheckCircle2 className="w-6 h-6 text-accent-green flex-shrink-0" />
-                    <span className="text-lg">{item}</span>
-                  </li>
-                ))}
+                <li className="flex items-center space-x-3">
+                  <CheckCircle2 className="w-6 h-6 text-accent-green flex-shrink-0" />
+                  <span className="text-lg text-white">Certified technical expertise</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle2 className="w-6 h-6 text-accent-green flex-shrink-0" />
+                  <span className="text-lg text-white">Genuine Schneider products</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle2 className="w-6 h-6 text-accent-green flex-shrink-0" />
+                  <span className="text-lg text-white">Complete system integration</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle2 className="w-6 h-6 text-accent-green flex-shrink-0" />
+                  <span className="text-lg text-white">Lifetime technical support</span>
+                </li>
               </ul>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
+            <div className="relative">
               <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-12 border border-white/20">
                 <div className="text-center">
                   <Award className="w-32 h-32 text-accent-green mx-auto mb-6" />
-                  <h3 className="text-2xl font-bold mb-4">Certified Partner</h3>
-                  <p className="text-white/80">
+                  <h3 className="text-2xl font-bold mb-4 text-white">Certified Partner</h3>
+                  <p className="text-white" style={{ opacity: 0.8 }}>
                     Delivering excellence through authorized Schneider Electric solutions
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -277,7 +273,8 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
             >
               <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
                 Ready to Start Your Project?

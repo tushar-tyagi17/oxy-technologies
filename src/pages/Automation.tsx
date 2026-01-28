@@ -89,62 +89,67 @@ export default function Automation() {
       </section>
 
       {/* Schneider Partnership */}
-      <section className="section-padding bg-gradient-primary text-white">
+      <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
         <Container>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="text-white">
               <Award className="w-20 h-20 text-accent-green mb-6" />
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
                 Schneider Electric System Integrator
               </h2>
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
+              <p className="text-xl mb-8 leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                 As an authorized Schneider Electric partner, we deliver cutting-edge automation solutions with guaranteed quality and performance.
               </p>
               <ul className="space-y-4">
-                {[
-                  'Certified technical team',
-                  'Genuine Schneider components',
-                  'Complete system design & integration',
-                  'Comprehensive after-sales support',
-                  'Training and documentation',
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0" />
-                    <span className="text-lg">{item}</span>
-                  </li>
-                ))}
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0" />
+                  <span className="text-lg text-white">Certified technical team</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0" />
+                  <span className="text-lg text-white">Genuine Schneider components</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0" />
+                  <span className="text-lg text-white">Complete system design & integration</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0" />
+                  <span className="text-lg text-white">Comprehensive after-sales support</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0" />
+                  <span className="text-lg text-white">Training and documentation</span>
+                </li>
               </ul>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-2 gap-6"
-            >
-              {[
-                'PLC Programming',
-                'SCADA Development',
-                'HMI Configuration',
-                'Network Setup',
-                'Commissioning',
-                'Training',
-              ].map((service, index) => (
-                <div
-                  key={index}
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20"
-                >
-                  <div className="text-3xl font-bold text-accent-green mb-2">
-                    ✓
-                  </div>
-                  <p className="font-semibold">{service}</p>
-                </div>
-              ))}
-            </motion.div>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20">
+                <div className="text-3xl font-bold text-accent-green mb-2">✓</div>
+                <p className="font-semibold text-white">PLC Programming</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20">
+                <div className="text-3xl font-bold text-accent-green mb-2">✓</div>
+                <p className="font-semibold text-white">SCADA Development</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20">
+                <div className="text-3xl font-bold text-accent-green mb-2">✓</div>
+                <p className="font-semibold text-white">HMI Configuration</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20">
+                <div className="text-3xl font-bold text-accent-green mb-2">✓</div>
+                <p className="font-semibold text-white">Network Setup</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20">
+                <div className="text-3xl font-bold text-accent-green mb-2">✓</div>
+                <p className="font-semibold text-white">Commissioning</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-white/20">
+                <div className="text-3xl font-bold text-accent-green mb-2">✓</div>
+                <p className="font-semibold text-white">Training</p>
+              </div>
+            </div>
           </div>
         </Container>
       </section>

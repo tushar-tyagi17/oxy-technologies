@@ -263,11 +263,71 @@ export default function Contact() {
       {/* Map Section */}
       <section className="py-16 bg-secondary-50">
         <Container>
-          <div className="rounded-2xl overflow-hidden shadow-strong h-96 bg-secondary-200 flex items-center justify-center">
-            <div className="text-center text-secondary-600">
-              <MapPin className="w-16 h-16 mx-auto mb-4" />
-              <p className="text-xl font-semibold">Google Maps Integration</p>
-              <p className="text-sm mt-2">Embed your location map here</p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary-900 mb-4">
+              Visit Our Office
+            </h2>
+            <p className="text-lg text-secondary-600">
+              Find us at our corporate office and works location
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Corporate Office Map */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-secondary-900">
+                Corporate Office & Works
+              </h3>
+              <div className="rounded-2xl overflow-hidden shadow-strong h-96 relative group">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2805.393082934539!2d77.4543949758874!3d28.53525598270634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce6262291518d%3A0x6b6b6b6b6b6b6b6b!2sTech%20Zone%204%2C%20Amrapali%20Dream%20Valley%2C%20Greater%20Noida!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Corporate Office Location - Tech Zone 4, Amrapali Dream Valley"
+                ></iframe>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <button 
+                    onClick={() => window.open('https://www.google.com/maps/search/?api=1&query=Tech+Zone+4%2C+Plot+No+-+17%2C+Amrapali+Dream+Valley%2C+Greater+Noida%2C+Uttar+Pradesh+201318', '_blank')}
+                    className="bg-white text-secondary-900 px-6 py-3 rounded-xl font-semibold shadow-strong hover:shadow-industrial transition-all duration-300 transform hover:scale-105"
+                  >
+                    Open in Google Maps
+                  </button>
+                </div>
+              </div>
+              <p className="text-sm text-secondary-600">
+                Tech Zone 4, Plot No - 17, Amrapali Dream Valley, Greater Noida, Uttar Pradesh 201318
+              </p>
+            </div>
+
+            {/* Branch Office Map */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-secondary-900">
+                Branch Office
+              </h3>
+              <div className="rounded-2xl overflow-hidden shadow-strong h-96">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.5!2d77.3910!3d28.6271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cef3b4c5b7c9b%3A0x7c0c8b7c5b7c9b7c!2sD-71%2C%20D%20Block%2C%20Sector%2063%2C%20Noida!5e0!3m2!1sen!2sin!4v1234567890"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Branch Office Location"
+                ></iframe>
+              </div>
+              <p className="text-sm text-secondary-600">
+                D-71, D Block, Sector 63, Noida, Uttar Pradesh 201301, India
+              </p>
             </div>
           </div>
         </Container>

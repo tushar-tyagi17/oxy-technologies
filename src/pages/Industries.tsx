@@ -58,36 +58,47 @@ export default function Industries() {
       </section>
 
       {/* Key Clients */}
-      <section className="section-padding bg-gradient-primary text-white">
+      <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
         <Container>
           <div className="text-center max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
                 Trusted by Leading Organizations
               </h2>
-              <p className="text-xl text-white/90 mb-12">
+              <p className="text-xl mb-12 text-white" style={{ opacity: 0.9 }}>
                 Serving India's top industrial and infrastructure companies
               </p>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  'HPCL', 'IOCL', 'BPCL', 'Reliance Industries',
-                  'Leading Hospitals', 'Cement Plants', 'Sugar Mills',
-                  'Infrastructure Projects', 'Government Bodies'
-                ].map((client, index) => (
-                  <div
-                    key={index}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300"
-                  >
-                    <p className="text-lg font-semibold">{client}</p>
-                  </div>
-                ))}
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                  <p className="text-lg font-semibold text-white">HPCL</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                  <p className="text-lg font-semibold text-white">IOCL</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                  <p className="text-lg font-semibold text-white">BPCL</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                  <p className="text-lg font-semibold text-white">Reliance Industries</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                  <p className="text-lg font-semibold text-white">Leading Hospitals</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                  <p className="text-lg font-semibold text-white">Cement Plants</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                  <p className="text-lg font-semibold text-white">Sugar Mills</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                  <p className="text-lg font-semibold text-white">Infrastructure Projects</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                  <p className="text-lg font-semibold text-white">Government Bodies</p>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </Container>
       </section>

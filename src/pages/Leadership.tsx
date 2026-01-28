@@ -72,38 +72,36 @@ export default function Leadership() {
       </section>
 
       {/* Company Culture */}
-      <section className="section-padding bg-gradient-primary text-white">
+      <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
         <Container>
           <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
                 Our Team Philosophy
               </h2>
-              <p className="text-xl text-white/90 mb-12">
+              <p className="text-xl mb-12 text-white" style={{ opacity: 0.9 }}>
                 Building success through collaboration, innovation, and integrity
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  { title: 'Technical Excellence', desc: 'Highly skilled engineers and technicians' },
-                  { title: 'Customer Focus', desc: 'Dedicated to client satisfaction' },
-                  { title: 'Continuous Learning', desc: 'Regular training and skill upgrades' },
-                  { title: 'Safety First', desc: 'Uncompromising commitment to workplace safety' },
-                ].map((value, index) => (
-                  <div
-                    key={index}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
-                  >
-                    <h3 className="text-xl font-bold mb-3">{value.title}</h3>
-                    <p className="text-white/80">{value.desc}</p>
-                  </div>
-                ))}
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <h3 className="text-xl font-bold text-white mb-3">Technical Excellence</h3>
+                  <p className="text-white" style={{ opacity: 0.8 }}>Highly skilled engineers and technicians</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <h3 className="text-xl font-bold text-white mb-3">Customer Focus</h3>
+                  <p className="text-white" style={{ opacity: 0.8 }}>Dedicated to client satisfaction</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <h3 className="text-xl font-bold text-white mb-3">Continuous Learning</h3>
+                  <p className="text-white" style={{ opacity: 0.8 }}>Regular training and skill upgrades</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <h3 className="text-xl font-bold text-white mb-3">Safety First</h3>
+                  <p className="text-white" style={{ opacity: 0.8 }}>Uncompromising commitment to workplace safety</p>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </Container>
       </section>

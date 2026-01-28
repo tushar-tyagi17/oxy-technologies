@@ -16,7 +16,7 @@ export default function Footer() {
               <img 
                 src="/assets/oxy-logo.png" 
                 alt="OXY Technologies Logo" 
-                className="h-24 w-auto"
+                className="h-20 w-auto md:h-24 lg:h-28"
               />
             </div>
             <p className="text-secondary-300 text-sm leading-relaxed mb-4">

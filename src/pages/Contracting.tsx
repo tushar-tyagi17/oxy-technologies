@@ -114,59 +114,71 @@ export default function Contracting() {
       </section>
 
       {/* Capabilities */}
-      <section className="section-padding bg-secondary-50">
+      <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
         <Container>
           <div className="grid lg:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl font-display font-bold text-secondary-900 mb-6">
+            <div>
+              <h2 className="text-4xl font-display font-bold text-white mb-6">
                 Turnkey Project Capabilities
               </h2>
-              <p className="text-lg text-secondary-700 mb-8">
+              <p className="text-lg mb-8 text-white" style={{ opacity: 0.9 }}>
                 Complete project execution with single-point responsibility
               </p>
               <ul className="space-y-4">
-                {[
-                  'Electrical panel design and manufacturing',
-                  'On-site installation and wiring',
-                  'PLC programming and commissioning',
-                  'SCADA system integration',
-                  'Complete testing and validation',
-                  'Documentation and training',
-                  'Preventive maintenance support',
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start space-x-3">
-                    <Icons.CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0 mt-0.5" />
-                    <span className="text-secondary-700 text-lg">{item}</span>
-                  </li>
-                ))}
+                <li className="flex items-start space-x-3">
+                  <Icons.CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-lg" style={{ opacity: 0.9 }}>Electrical panel design and manufacturing</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Icons.CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-lg" style={{ opacity: 0.9 }}>On-site installation and wiring</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Icons.CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-lg" style={{ opacity: 0.9 }}>PLC programming and commissioning</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Icons.CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-lg" style={{ opacity: 0.9 }}>SCADA system integration</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Icons.CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-lg" style={{ opacity: 0.9 }}>Complete testing and validation</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Icons.CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-lg" style={{ opacity: 0.9 }}>Documentation and training</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <Icons.CheckCircle className="w-6 h-6 text-accent-green flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-lg" style={{ opacity: 0.9 }}>Preventive maintenance support</span>
+                </li>
               </ul>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-primary text-white rounded-3xl p-12"
-            >
-              <h3 className="text-3xl font-bold mb-6">Why Choose Our Contracting Services?</h3>
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-12 border border-white/20">
+              <h3 className="text-3xl font-bold mb-6 text-white">
+                Why Choose Our Contracting Services?
+              </h3>
               <ul className="space-y-6">
-                {[
-                  { title: 'Single Roof Solution', desc: 'Manufacturing + contracting under one organization' },
-                  { title: 'Experienced Team', desc: '500+ projects executed successfully' },
-                  { title: 'Quality Assurance', desc: 'ISO certified processes and international standards' },
-                  { title: 'On-Time Delivery', desc: 'Proven track record of timely project completion' },
-                ].map((item, index) => (
-                  <li key={index}>
-                    <h4 className="font-bold text-xl mb-2 text-accent-green">{item.title}</h4>
-                    <p className="text-white/90">{item.desc}</p>
-                  </li>
-                ))}
+                <li>
+                  <h4 className="font-bold text-xl mb-2 text-accent-green">Single Roof Solution</h4>
+                  <p className="text-white" style={{ opacity: 0.9 }}>Manufacturing + contracting under one organization</p>
+                </li>
+                <li>
+                  <h4 className="font-bold text-xl mb-2 text-accent-green">Experienced Team</h4>
+                  <p className="text-white" style={{ opacity: 0.9 }}>500+ projects executed successfully</p>
+                </li>
+                <li>
+                  <h4 className="font-bold text-xl mb-2 text-accent-green">Quality Assurance</h4>
+                  <p className="text-white" style={{ opacity: 0.9 }}>ISO certified processes and international standards</p>
+                </li>
+                <li>
+                  <h4 className="font-bold text-xl mb-2 text-accent-green">On-Time Delivery</h4>
+                  <p className="text-white" style={{ opacity: 0.9 }}>Proven track record of timely project completion</p>
+                </li>
               </ul>
-            </motion.div>
+            </div>
           </div>
         </Container>
       </section>

@@ -44,10 +44,17 @@ export default function Products() {
             {PRODUCTS.map((product) => (
               <Card key={product.id} className="group cursor-pointer" hover={true}>
                 <div className="mb-6">
-                  <div className="w-full h-48 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-xl flex items-center justify-center mb-4 group-hover:from-primary-200 group-hover:to-secondary-200 transition-all duration-300">
-                    <div className="text-6xl font-bold text-primary-600/20">
-                      {product.name.split(' ')[0]}
-                    </div>
+                  <div className="w-full h-48 rounded-xl overflow-hidden mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src={`/images/${product.id === 'pcc' ? 'PCC.png' : product.id === 'mcc' ? 'MCC.png' : product.id === 'plc-imcc' ? 'PLC & IMCC Panels.png' : product.id === 'vfd' ? 'VFD Panels.png' : product.id === 'apfc' ? 'APFC Panels.png' : product.id === 'busduct' ? 'Bus Ducts & Rising Mains.png' : 'placeholder.jpg'}`}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = '/images/placeholder.jpg';
+                        target.onerror = null;
+                      }}
+                    />
                   </div>
                   <h3 className="text-2xl font-bold text-secondary-900 mb-3">
                     {product.name}
@@ -143,37 +150,32 @@ export default function Products() {
       )}
 
       {/* Quality Assurance */}
-      <section className="section-padding bg-gradient-primary text-white">
+      <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
         <Container>
           <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
                 Quality Assurance
               </h2>
-              <p className="text-xl text-white/90 mb-12">
+              <p className="text-xl mb-12 text-white" style={{ opacity: 0.9 }}>
                 Every product undergoes rigorous testing and quality checks
               </p>
 
               <div className="grid md:grid-cols-3 gap-6">
-                {[
-                  'ISO Certified Manufacturing',
-                  'International Standards Compliance',
-                  'Comprehensive Testing Facilities',
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
-                  >
-                    <CheckCircle className="w-12 h-12 text-accent-green mx-auto mb-4" />
-                    <p className="text-lg font-semibold">{item}</p>
-                  </div>
-                ))}
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <CheckCircle className="w-12 h-12 text-accent-green mx-auto mb-4" />
+                  <p className="text-lg font-semibold text-white">ISO Certified Manufacturing</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <CheckCircle className="w-12 h-12 text-accent-green mx-auto mb-4" />
+                  <p className="text-lg font-semibold text-white">International Standards Compliance</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <CheckCircle className="w-12 h-12 text-accent-green mx-auto mb-4" />
+                  <p className="text-lg font-semibold text-white">Comprehensive Testing Facilities</p>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </Container>
       </section>

@@ -253,50 +253,79 @@ export default function About() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="section-padding bg-gradient-primary text-white">
+      <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
         <Container>
           <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
                 Why Choose OXY Technologies?
               </h2>
-              <p className="text-xl text-white/90">
+              <p className="text-xl text-white" style={{ opacity: 0.9 }}>
                 The single-roof solution advantage
               </p>
-            </motion.div>
+            </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              {[
-                'Manufacturing + Contracting under one roof',
-                'Schneider Electric authorized system integrator',
-                'ISO certified quality management',
-                'In-house design and engineering team',
-                'State-of-the-art testing facilities',
-                'Experienced project management',
-                'Competitive pricing with no compromise on quality',
-                'Comprehensive after-sales support',
-                'On-time project delivery',
-                'Strong presence across multiple industries',
-              ].map((reason, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4"
-                >
-                  <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-secondary-900 font-bold">{index + 1}</span>
-                  </div>
-                  <p className="text-lg">{reason}</p>
-                </motion.div>
-              ))}
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">1</span>
+                </div>
+                <p className="text-lg text-white">Manufacturing + Contracting under one roof</p>
+              </div>
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">2</span>
+                </div>
+                <p className="text-lg text-white">Schneider Electric authorized system integrator</p>
+              </div>
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">3</span>
+                </div>
+                <p className="text-lg text-white">ISO certified quality management</p>
+              </div>
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">4</span>
+                </div>
+                <p className="text-lg text-white">In-house design and engineering team</p>
+              </div>
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">5</span>
+                </div>
+                <p className="text-lg text-white">State-of-the-art testing facilities</p>
+              </div>
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">6</span>
+                </div>
+                <p className="text-lg text-white">Experienced project management</p>
+              </div>
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">7</span>
+                </div>
+                <p className="text-lg text-white">Competitive pricing with no compromise on quality</p>
+              </div>
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">8</span>
+                </div>
+                <p className="text-lg text-white">Comprehensive after-sales support</p>
+              </div>
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">9</span>
+                </div>
+                <p className="text-lg text-white">On-time project delivery</p>
+              </div>
+              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="w-8 h-8 bg-accent-green rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-secondary-900 font-bold">10</span>
+                </div>
+                <p className="text-lg text-white">Strong presence across multiple industries</p>
+              </div>
             </div>
           </div>
         </Container>
