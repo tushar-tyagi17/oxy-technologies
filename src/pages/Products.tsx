@@ -41,7 +41,7 @@ export default function Products() {
       <section className="section-padding bg-white">
         <Container>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PRODUCTS.map((product, index) => (
+            {PRODUCTS.map((product) => (
               <Card key={product.id} className="group cursor-pointer" hover={true}>
                 <div className="mb-6">
                   <div className="w-full h-48 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-xl flex items-center justify-center mb-4 group-hover:from-primary-200 group-hover:to-secondary-200 transition-all duration-300">

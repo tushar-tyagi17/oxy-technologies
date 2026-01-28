@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { NAV_ITEMS, COMPANY } from '@/constants';
+import { Menu, X } from 'lucide-react';
+import { NAV_ITEMS } from '@/constants';
 import Container from '../ui/Container';
 
 export default function Header() {
