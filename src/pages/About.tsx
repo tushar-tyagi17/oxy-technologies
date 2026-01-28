@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import { Target, Eye, Award, Users, Building, Zap } from 'lucide-react';
+import { Target, Eye, Award, Users, Building, Zap, Mail, Phone } from 'lucide-react';
 import Container from '@/components/ui/Container';
 import Card from '@/components/ui/Card';
-import { COMPANY } from '@/constants';
+import { COMPANY, LEADERSHIP } from '@/constants';
 
 export default function About() {
   const values = [
@@ -189,6 +189,63 @@ export default function About() {
                 <p className="text-secondary-600 leading-relaxed">
                   {capability.description}
                 </p>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Our Team */}
+      <section className="section-padding bg-secondary-50">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-secondary-900 mb-6">
+              Our Team
+            </h2>
+            <p className="text-xl text-secondary-600 max-w-4xl mx-auto mb-8">
+              OXYGEN is a group mix of young as well as experienced professionals who have good amount of experience in the industry. Each individual is well versed in their fields.
+            </p>
+            <p className="text-lg text-secondary-700 max-w-4xl mx-auto">
+              We expertise in understanding customers needs, selecting and designing accordingly and then manufacturing best in the industry. We are also committed for after sales service to our customers. Our clients enjoy a single roof for all the solutions required as per their needs which make the work very convenient, easy, fast and perfectly synced.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {LEADERSHIP.map((leader, index) => (
+              <Card key={index} className="text-center">
+                <div className="w-32 h-32 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Users className="w-16 h-16 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-secondary-900 mb-2">
+                  {leader.name}
+                </h3>
+                <p className="text-primary-600 font-semibold mb-4 text-lg">
+                  {leader.role}
+                </p>
+                <p className="text-secondary-600 mb-6">
+                  {leader.description}
+                </p>
+                <div className="space-y-3 text-sm">
+                  <a
+                    href={`mailto:${leader.email}`}
+                    className="flex items-center justify-center space-x-2 text-secondary-700 hover:text-primary-600 transition-colors"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>{leader.email}</span>
+                  </a>
+                  <a
+                    href={`tel:${leader.phone}`}
+                    className="flex items-center justify-center space-x-2 text-secondary-700 hover:text-primary-600 transition-colors"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>{leader.phone}</span>
+                  </a>
+                </div>
               </Card>
             ))}
           </div>

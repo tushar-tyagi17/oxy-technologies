@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, Send, X, CheckCircle2 } from 'lucide-react';
 import Container from '@/components/ui/Container';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
@@ -14,11 +14,18 @@ export default function Contact() {
     company: '',
     message: '',
   });
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  // Show welcome modal when component mounts
+  useEffect(() => {
+    setShowWelcomeModal(true);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Form submission logic here
-    alert('Thank you for your inquiry! We will get back to you soon.');
+    setShowSuccessModal(true);
     setFormData({ name: '', email: '', phone: '', company: '', message: '' });
   };
 
@@ -196,9 +203,15 @@ export default function Contact() {
                       <h3 className="font-bold text-secondary-900 mb-1">Call Us</h3>
                       <a
                         href={`tel:${COMPANY.phone}`}
-                        className="text-primary-600 hover:text-primary-700 transition-colors"
+                        className="text-primary-600 hover:text-primary-700 transition-colors block mb-1"
                       >
                         {COMPANY.phone}
+                      </a>
+                      <a
+                        href={`tel:${COMPANY.phoneAlt}`}
+                        className="text-primary-600 hover:text-primary-700 transition-colors block"
+                      >
+                        {COMPANY.phoneAlt}
                       </a>
                     </div>
                   </div>
@@ -210,8 +223,15 @@ export default function Contact() {
                       <MapPin className="w-6 h-6 text-primary-600" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-secondary-900 mb-1">Visit Us</h3>
-                      <p className="text-secondary-600">{COMPANY.address}</p>
+                      <h3 className="font-bold text-secondary-900 mb-3">Visit Us</h3>
+                      <p className="text-secondary-600 text-sm mb-3">
+                        <strong>Corporate Office & Works:</strong><br />
+                        {COMPANY.address}
+                      </p>
+                      <p className="text-secondary-600 text-sm">
+                        <strong>Branch Office:</strong><br />
+                        {COMPANY.addressAlt}
+                      </p>
                     </div>
                   </div>
                 </Card>
@@ -275,6 +295,91 @@ export default function Contact() {
           </div>
         </Container>
       </section>
+
+      {/* Welcome Modal */}
+      <AnimatePresence>
+        {showWelcomeModal && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-white rounded-2xl max-w-md w-full p-8 relative shadow-strong"
+            >
+              <button
+                onClick={() => setShowWelcomeModal(false)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-lg hover:bg-secondary-100 flex items-center justify-center transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5 text-secondary-600" />
+              </button>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Mail className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-secondary-900 mb-3">
+                  Welcome to OXY Technologies!
+                </h3>
+                <p className="text-secondary-600 mb-6">
+                  We're excited to hear about your project. Please fill out the form below and our team will get back to you within 24 hours.
+                </p>
+                <Button
+                  onClick={() => setShowWelcomeModal(false)}
+                  className="w-full"
+                >
+                  Get Started
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-white rounded-2xl max-w-md w-full p-8 relative shadow-strong"
+            >
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-lg hover:bg-secondary-100 flex items-center justify-center transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5 text-secondary-600" />
+              </button>
+
+              <div className="text-center">
+                <div className="w-20 h-20 bg-accent-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="w-12 h-12 text-accent-green" />
+                </div>
+                <h3 className="text-2xl font-bold text-secondary-900 mb-3">
+                  Message Sent Successfully!
+                </h3>
+                <p className="text-secondary-600 mb-6">
+                  Thank you for reaching out to us. Our team will review your inquiry and get back to you within 24 hours.
+                </p>
+                <div className="space-y-3">
+                  <Button
+                    onClick={() => setShowSuccessModal(false)}
+                    className="w-full"
+                  >
+                    Close
+                  </Button>
+                  <p className="text-sm text-secondary-500">
+                    Need urgent assistance? Call us at {COMPANY.phone}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

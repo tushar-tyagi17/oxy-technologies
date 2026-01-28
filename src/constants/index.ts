@@ -3,9 +3,11 @@ export const COMPANY = {
   name: 'OXY Technologies',
   tagline: 'Producing Excellence | Delivering Solutions',
   parentCompany: 'Oxygen Group',
-  email: 'info@oxytechnologies.com',
-  phone: '+91-XXXXXXXXXX',
-  address: 'Industrial Area, City, State, India',
+  email: 'Info@Oxytechnologies.in',
+  phone: '+91 9311715246',
+  phoneAlt: '+91 9311715243',
+  address: 'T3-B1314, Tower 3, NX One Tower, Near Char Murti Chowk, Greater Noida West, Uttar Pradesh, India',
+  addressAlt: 'D-71, D Block, Sector 63, Noida, Uttar Pradesh 201301, India',
 };
 
 // Navigation Menu
@@ -189,18 +191,24 @@ export const CONTRACTING_STEPS = [
 // Leadership Team
 export const LEADERSHIP = [
   {
-    name: 'Group Head',
-    role: 'Chairman & Managing Director',
-    description: '25+ years in electrical industry leadership',
+    name: 'Ashish Yadav',
+    role: 'Group Head',
+    description: 'Leading OXY Technologies with extensive industry experience and strategic vision',
+    email: 'Ashish.Yadav@oxygengroup.co.in',
+    phone: '+91 9311715246',
   },
   {
-    name: 'Technical Head',
-    role: 'Chief Technical Officer',
-    description: 'Expert in automation and system integration',
+    name: 'Nitin Chauhan',
+    role: 'Technical Head',
+    description: 'Expert in automation and system integration with deep technical expertise',
+    email: 'Nitin.Chauhan@oxygengroup.co.in',
+    phone: '+91 9311715243',
   },
   {
-    name: 'Finance Head',
-    role: 'Chief Financial Officer',
-    description: 'Strategic financial planning and operations',
+    name: 'Shobhnath Singh',
+    role: 'Finance Head',
+    description: 'Strategic financial planning and operations management',
+    email: 'Shobhnath.Singh@oxygengroup.co.in',
+    phone: '+91 9311715247',
   },
 ];

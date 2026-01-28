@@ -71,16 +71,33 @@ export default function Footer() {
               </li>
               <li className="flex items-start space-x-3">
                 <Phone className="w-5 h-5 text-accent-green flex-shrink-0 mt-0.5" />
-                <a
-                  href={`tel:${COMPANY.phone}`}
-                  className="text-secondary-300 hover:text-accent-green transition-colors duration-300"
-                >
-                  {COMPANY.phone}
-                </a>
+                <div className="flex flex-col space-y-1">
+                  <a
+                    href={`tel:${COMPANY.phone}`}
+                    className="text-secondary-300 hover:text-accent-green transition-colors duration-300"
+                  >
+                    {COMPANY.phone}
+                  </a>
+                  <a
+                    href={`tel:${COMPANY.phoneAlt}`}
+                    className="text-secondary-300 hover:text-accent-green transition-colors duration-300"
+                  >
+                    {COMPANY.phoneAlt}
+                  </a>
+                </div>
               </li>
               <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-accent-green flex-shrink-0 mt-0.5" />
-                <span className="text-secondary-300">{COMPANY.address}</span>
+                <div className="text-secondary-300 space-y-3">
+                  <div>
+                    <strong className="text-accent-green">Corporate Office & Works:</strong><br />
+                    {COMPANY.address}
+                  </div>
+                  <div>
+                    <strong className="text-accent-green">Branch Office:</strong><br />
+                    {COMPANY.addressAlt}
+                  </div>
+                </div>
               </li>
             </ul>
 
