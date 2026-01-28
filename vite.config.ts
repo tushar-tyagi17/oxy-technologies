@@ -15,11 +15,28 @@ export default defineConfig({
     open: true,
   },
   build: {
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'animation-vendor': ['framer-motion'],
+        manualChunks(id) {
+          if (id.indexOf('node_modules') !== -1) {
+            if (id.indexOf('react') !== -1 || id.indexOf('react-dom') !== -1) {
+              return 'react-vendor';
+            }
+            if (id.indexOf('react-router') !== -1) {
+              return 'router-vendor';
+            }
+            if (id.indexOf('framer-motion') !== -1) {
+              return 'animation-vendor';
+            }
+            if (id.indexOf('lucide-react') !== -1) {
+              return 'ui-vendor';
+            }
+            if (id.indexOf('@headlessui') !== -1 || id.indexOf('@heroicons') !== -1) {
+              return 'ui-components';
+            }
+            return 'vendor';
+          }
         },
       },
     },
