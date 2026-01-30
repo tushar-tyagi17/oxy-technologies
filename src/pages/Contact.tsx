@@ -83,9 +83,7 @@ export default function Contact() {
     e.preventDefault();
     if (!validateForm()) return;
 
-    const form = e.target as HTMLFormElement;
-
-    const payload = new FormData();
+    const payload = new URLSearchParams();
     payload.append('access_key', 'ed1562fd-664a-440d-9a2c-4e12a370c5b1');
     payload.append('subject', 'New Contact Form Submission');
     payload.append('from_name', 'OXY Technologies Contact Form');
@@ -102,7 +100,10 @@ export default function Contact() {
       setSubmitResult('Submitting...');
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: payload,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: payload.toString(),
       });
       const json = await res.json().catch(() => ({}));
       console.log('Web3Forms response', res.status, json);
@@ -214,18 +215,10 @@ export default function Contact() {
                 Send us a Message
               </h2>
               <form 
-                action="https://api.web3forms.com/submit" 
-                method="POST" 
                 onSubmit={handleSubmit}
                 className="space-y-6"
               >
-                <input type="hidden" name="access_key" value="ed1562fd-664a-440d-9a2c-4e12a370c5b1" />
-                <input type="hidden" name="subject" value="New Contact Form Submission" />
-                <input type="hidden" name="from_name" value="OXY Technologies Contact Form" />
-                <input type="hidden" name="country" value={selectedCountry.name} />
-                <input type="hidden" name="country_code" value={selectedCountry.dialCode} />
-                {/* <input type="hidden" name="timezone" value="Asia/Kolkata" /> */}
-                <input type="hidden" name="botcheck" value="" />
+                {/* Form fields below */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-secondary-700 mb-2">
                     Full Name *
