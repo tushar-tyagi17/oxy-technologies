@@ -21,6 +21,7 @@ export default function Contact() {
   const [selectedCountry, setSelectedCountry] = useState<CountryCode>(countryCodes[0]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [submitResult, setSubmitResult] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
@@ -81,41 +82,39 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      try {
-        // Submit to Formspree
-        const response = await fetch('https://formspree.io/f/mlgnwnbn', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            company: formData.company,
-            message: formData.message,
-            countryCode: selectedCountry.dialCode,
-            country: selectedCountry.name
-          }),
-        });
-
-        if (response.ok) {
-          // Form submitted successfully
-          setShowSuccessModal(true);
-          setFormData({ name: '', email: '', phone: '', company: '', message: '' });
-          setErrors({});
-          setSearchQuery('');
-          setSelectedCountry(countryCodes[0]);
-        } else {
-          // Handle submission error
-          console.error('Form submission failed');
-          alert('Failed to send message. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        alert('Failed to send message. Please try again.');
+    if (!validateForm()) {
+      return;
+    }
+    
+    setSubmitResult('Sending...');
+    
+    try {
+      const form = e.target as HTMLFormElement;
+      const formDataWeb3 = new FormData(form);
+      formDataWeb3.append('access_key', '85473d88-1100-4450-b0c6-7dca85dfe5aa');
+      
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataWeb3
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setSubmitResult('Form Submitted Successfully');
+        setShowSuccessModal(true);
+        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+        setErrors({});
+        setSearchQuery('');
+        setSelectedCountry(countryCodes[0]);
+        form.reset();
+      } else {
+        setSubmitResult('Error submitting form');
+        console.error('Web3Forms error:', data);
       }
+    } catch (error) {
+      setSubmitResult('Error submitting form');
+      console.error('Submission error:', error);
     }
   };
 
@@ -209,9 +208,11 @@ export default function Contact() {
                 Send us a Message
               </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <input type="hidden" name="_subject" value="New Contact Form Submission" />
-                <input type="hidden" name="_next" value="/contact" />
-                <input type="text" name="_gotcha" style={{ display: 'none' }} />
+                <input type="hidden" name="subject" value="New Contact Form Submission from OXY Technologies" />
+                <input type="hidden" name="from_name" value="OXY Technologies Contact Form" />
+                <input type="hidden" name="country" value={selectedCountry.name} />
+                <input type="hidden" name="country_code" value={selectedCountry.dialCode} />
+                <input type="checkbox" name="botcheck" style={{ display: 'none' }} />
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-secondary-700 mb-2">
                     Full Name *
@@ -367,9 +368,16 @@ export default function Contact() {
                   )}
                 </div>
 
-                <Button type="submit" size="lg" icon={Send} className="w-full">
-                  Send Message
-                </Button>
+                <div className="space-y-4">
+                  <Button type="submit" size="lg" icon={Send} className="w-full">
+                    Send Message
+                  </Button>
+                  {submitResult && (
+                    <div className={`text-center p-3 rounded-lg ${submitResult.includes('Error') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                      {submitResult}
+                    </div>
+                  )}
+                </div>
               </form>
             </motion.div>
 
