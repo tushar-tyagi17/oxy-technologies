@@ -79,31 +79,49 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    if (!validateForm()) {
-      e.preventDefault(); // Only prevent submission if validation fails
-      return;
-    }
-    
-    // Add all payload fields just before submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
     const form = e.target as HTMLFormElement;
-    
-    // Add submitted_at timestamp
-    // const submittedAtInput = document.createElement('input');
-    // submittedAtInput.type = 'hidden';
-    // submittedAtInput.name = 'submitted_at';
-    // submittedAtInput.value = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-    // form.appendChild(submittedAtInput);
-    
-    // Show success feedback since form will submit
-    setTimeout(() => {
-      setSubmitResult('Form Submitted Successfully');
-      setShowSuccessModal(true);
-      setFormData({ name: '', email: '', phone: '', company: '', message: '' });
-      setErrors({});
-      setSearchQuery('');
-      setSelectedCountry(countryCodes[0]);
-    }, 500);
+
+    const payload = new FormData();
+    payload.append('access_key', 'ed1562fd-664a-440d-9a2c-4e12a370c5b1');
+    payload.append('subject', 'New Contact Form Submission');
+    payload.append('from_name', 'OXY Technologies Contact Form');
+    payload.append('name', formData.name);
+    payload.append('email', formData.email);
+    payload.append('phone', formData.phone);
+    payload.append('company', formData.company);
+    payload.append('message', formData.message);
+    payload.append('country', selectedCountry.name);
+    payload.append('country_code', selectedCountry.dialCode);
+    payload.append('botcheck', '');
+
+    try {
+      setSubmitResult('Submitting...');
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload,
+      });
+      const json = await res.json().catch(() => ({}));
+      console.log('Web3Forms response', res.status, json);
+
+      if (res.ok && (json as any).success) {
+        setSubmitResult('Form Submitted Successfully');
+        setShowSuccessModal(true);
+        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+        setErrors({});
+        setSearchQuery('');
+        setSelectedCountry(countryCodes[0]);
+      } else {
+        const msg = (json as any).message || 'Submission failed';
+        setSubmitResult(`Error: ${msg}`);
+      }
+    } catch (err) {
+      console.error('Submit error', err);
+      setSubmitResult('Error submitting form. See console for details.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
