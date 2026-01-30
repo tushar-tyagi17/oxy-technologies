@@ -79,43 +79,22 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const handleSubmit = (e: React.FormEvent) => {
     if (!validateForm()) {
+      e.preventDefault(); // Only prevent submission if validation fails
       return;
     }
     
-    setSubmitResult('Sending...');
-    
-    try {
-      const form = e.target as HTMLFormElement;
-      const formDataWeb3 = new FormData(form);
-      formDataWeb3.append('access_key', '85473d88-1100-4450-b0c6-7dca85dfe5aa');
-      
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formDataWeb3
-      });
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        setSubmitResult('Form Submitted Successfully');
-        setShowSuccessModal(true);
-        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
-        setErrors({});
-        setSearchQuery('');
-        setSelectedCountry(countryCodes[0]);
-        form.reset();
-      } else {
-        setSubmitResult('Error submitting form');
-        console.error('Web3Forms error:', data);
-      }
-    } catch (error) {
-      setSubmitResult('Error submitting form');
-      console.error('Submission error:', error);
-    }
+    // If validation passes, let the form submit naturally to Web3Forms
+    // Show success feedback since form will submit
+    setTimeout(() => {
+      setSubmitResult('Form Submitted Successfully');
+      setShowSuccessModal(true);
+      setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+      setErrors({});
+      setSearchQuery('');
+      setSelectedCountry(countryCodes[0]);
+    }, 500);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -207,7 +186,13 @@ export default function Contact() {
               <h2 className="text-3xl font-bold text-secondary-900 mb-6">
                 Send us a Message
               </h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                action="https://api.web3forms.com/submit" 
+                method="POST" 
+                onSubmit={handleSubmit}
+                className="space-y-6"
+              >
+                <input type="hidden" name="access_key" value="00e300b7-6cbb-4981-8330-9ef754e7c64e" />
                 <input type="hidden" name="subject" value="New Contact Form Submission from OXY Technologies" />
                 <input type="hidden" name="from_name" value="OXY Technologies Contact Form" />
                 <input type="hidden" name="country" value={selectedCountry.name} />
