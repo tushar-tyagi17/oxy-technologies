@@ -84,7 +84,7 @@ export default function Contact() {
     if (!validateForm()) return;
 
     const payload = new URLSearchParams();
-    payload.append('access_key', 'ed1562fd-664a-440d-9a2c-4e12a370c5b1');
+    payload.append('access_key', '82258ae0-f888-4a65-9c06-3490a6866ad8');
     payload.append('subject', 'New Contact Form Submission');
     payload.append('from_name', 'OXY Technologies Contact Form');
     payload.append('name', formData.name);
