@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Send, X, CheckCircle2 } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Mail, Phone, MapPin, Send, X, CheckCircle2, ChevronDown, AlertCircle } from 'lucide-react';
 import Container from '@/components/ui/Container';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { COMPANY } from '@/constants';
+import { countryCodes, type CountryCode } from '@/data/countryCodes';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,24 +15,157 @@ export default function Contact() {
     company: '',
     message: '',
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(countryCodes[0]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Show welcome modal when component mounts
   useEffect(() => {
     setShowWelcomeModal(true);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'This field is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'This field is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Phone validation
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'This field is required';
+    } else {
+      const phoneWithoutCode = formData.phone.replace(/[^0-9]/g, '');
+      if (phoneWithoutCode.length < 7) {
+        newErrors.phone = 'Please enter a valid phone number';
+      }
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'This field is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission logic here
-    setShowSuccessModal(true);
-    setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    
+    if (validateForm()) {
+      try {
+        // Submit to Formspree
+        const response = await fetch('https://formspree.io/f/mlgnwnbn', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            company: formData.company,
+            message: formData.message,
+            countryCode: selectedCountry.dialCode,
+            country: selectedCountry.name
+          }),
+        });
+
+        if (response.ok) {
+          // Form submitted successfully
+          setShowSuccessModal(true);
+          setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+          setErrors({});
+          setSearchQuery('');
+          setSelectedCountry(countryCodes[0]);
+        } else {
+          // Handle submission error
+          console.error('Form submission failed');
+          alert('Failed to send message. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Failed to send message. Please try again.');
+      }
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    
+    // Remove any non-digit characters except + at the start
+    value = value.replace(/[^0-9+]/g, '');
+    
+    // Ensure it starts with the selected country code
+    if (!value.startsWith(selectedCountry.dialCode)) {
+      value = selectedCountry.dialCode + value.replace(/[^0-9]/g, '');
+    }
+    
+    setFormData({ ...formData, phone: value });
+    
+    // Clear error when user starts typing
+    if (errors.phone) {
+      setErrors(prev => ({ ...prev, phone: '' }));
+    }
+  };
+
+  const handleCountrySelect = (country: CountryCode) => {
+    setSelectedCountry(country);
+    setSearchQuery('');
+    setShowDropdown(false);
+    
+    // Update phone number with new country code
+    if (formData.phone) {
+      const phoneDigits = formData.phone.replace(/[^0-9]/g, '').substring(selectedCountry.dialCode.length);
+      setFormData(prev => ({ ...prev, phone: country.dialCode + phoneDigits }));
+    } else {
+      setFormData(prev => ({ ...prev, phone: country.dialCode }));
+    }
+  };
+
+  const filteredCountries = countryCodes.filter(country => 
+    country.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    country.dialCode.includes(searchQuery)
+  );
 
   return (
     <div className="overflow-hidden">
@@ -75,6 +209,9 @@ export default function Contact() {
                 Send us a Message
               </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
+                <input type="hidden" name="_subject" value="New Contact Form Submission" />
+                <input type="hidden" name="_next" value="/contact" />
+                <input type="text" name="_gotcha" style={{ display: 'none' }} />
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-secondary-700 mb-2">
                     Full Name *
@@ -86,9 +223,15 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-secondary-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all"
+                    className={`w-full px-4 py-3 border border-secondary-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all ${errors.name ? '!border-red-500 !ring-red-500' : ''}`}
                     placeholder="Your Name"
                   />
+                  {errors.name && (
+                    <div className="mt-2 flex items-center gap-2 text-red-600 text-sm">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                      <span>{errors.name}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -102,25 +245,89 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-secondary-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all"
+                    className={`w-full px-4 py-3 border border-secondary-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all ${errors.email ? '!border-red-500 !ring-red-500' : ''}`}
                     placeholder="your.email@company.com"
                   />
+                  {errors.email && (
+                    <div className="mt-2 flex items-center gap-2 text-red-600 text-sm">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                      <span>{errors.email}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div>
                   <label htmlFor="phone" className="block text-sm font-semibold text-secondary-700 mb-2">
                     Phone Number *
                   </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-secondary-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all"
-                    placeholder="+91 XXXXXXXXXX"
-                  />
+                  <div className="relative">
+                    <div className="flex">
+                      {/* Country Code Dropdown */}
+                      <div className="relative" ref={dropdownRef}>
+                        <button
+                          type="button"
+                          onClick={() => setShowDropdown(!showDropdown)}
+                          className="flex items-center gap-2 px-3 py-3 bg-secondary-50 border border-r-0 border-secondary-300 rounded-l-xl hover:bg-secondary-100 transition-colors min-w-[120px]"
+                        >
+                          <span className="text-xl">{selectedCountry.flag}</span>
+                          <span className="font-medium">{selectedCountry.dialCode}</span>
+                          <ChevronDown className={`w-4 h-4 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {/* Dropdown Menu */}
+                        {showDropdown && (
+                          <div className="absolute left-0 top-full z-20 mt-1 w-80 max-h-60 bg-white border border-secondary-300 rounded-xl shadow-lg overflow-hidden">
+                            <div className="p-2 border-b border-secondary-200 sticky top-0 bg-white">
+                              <input
+                                type="text"
+                                placeholder="Search countries..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full px-3 py-2 text-sm border border-secondary-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600"
+                                autoFocus
+                              />
+                            </div>
+                            <div className="overflow-y-auto max-h-48">
+                              {filteredCountries.map((country) => (
+                                <button
+                                  key={country.code}
+                                  type="button"
+                                  onClick={() => handleCountrySelect(country)}
+                                  className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-secondary-50 transition-colors first:border-t first:border-secondary-200"
+                                >
+                                  <span className="text-xl">{country.flag}</span>
+                                  <div>
+                                    <div className="font-medium text-secondary-900">{country.name}</div>
+                                    <div className="text-sm text-secondary-500">{country.dialCode}</div>
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Phone Input */}
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handlePhoneChange}
+                        required
+                        className={`flex-1 px-4 py-3 border border-secondary-300 rounded-r-xl focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all ${errors.phone ? '!border-red-500 !ring-red-500' : ''}`}
+                        placeholder="XXXXXXXXXX"
+                      />
+                    </div>
+                    
+                    {/* Error Message */}
+                    {errors.phone && (
+                      <div className="mt-2 flex items-center gap-2 text-red-600 text-sm">
+                        <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                        <span>{errors.phone}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div>
@@ -149,9 +356,15 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 border border-secondary-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all resize-none"
+                    className={`w-full px-4 py-3 border border-secondary-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all resize-none ${errors.message ? '!border-red-500 !ring-red-500' : ''}`}
                     placeholder="Tell us about your project requirements..."
                   />
+                  {errors.message && (
+                    <div className="mt-2 flex items-center gap-2 text-red-600 text-sm">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                      <span>{errors.message}</span>
+                    </div>
+                  )}
                 </div>
 
                 <Button type="submit" size="lg" icon={Send} className="w-full">
@@ -334,7 +547,7 @@ export default function Contact() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-secondary text-white">
+      <section className="section-padding bg-[#2c3543] text-white">
         <Container>
           <div className="text-center max-w-3xl mx-auto">
             <motion.div

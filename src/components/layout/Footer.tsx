@@ -105,24 +105,24 @@ export default function Footer() {
             <div className="flex items-center space-x-4 mt-6">
               <a
                 href="#"
-                className="w-10 h-10 bg-white/10 hover:bg-accent-green rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-10 h-10 bg-[#0047b3] hover:bg-[#00ff88] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-5 h-5 text-white" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-white/10 hover:bg-accent-green rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-10 h-10 bg-[#0047b3] hover:bg-[#00ff88] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
                 aria-label="Twitter"
               >
-                <Twitter className="w-5 h-5" />
+                <Twitter className="w-5 h-5 text-white" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-white/10 hover:bg-accent-green rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-10 h-10 bg-[#0047b3] hover:bg-[#00ff88] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
                 aria-label="Facebook"
               >
-                <Facebook className="w-5 h-5" />
+                <Facebook className="w-5 h-5 text-white" />
               </a>
             </div>
           </div>

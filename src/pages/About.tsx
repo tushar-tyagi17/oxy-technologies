@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Target, Eye, Award, Users, Building, Zap, Mail, Phone } from 'lucide-react';
 import Container from '@/components/ui/Container';
 import Card from '@/components/ui/Card';
-import { COMPANY, LEADERSHIP } from '@/constants';
+import { COMPANY, LEADERSHIP, STATS } from '@/constants';
 
 export default function About() {
   const values = [
@@ -45,6 +45,12 @@ export default function About() {
     <div className="overflow-hidden">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-primary-900 to-secondary-900">
+        <div className="absolute inset-0 bg-cover bg-center" style={{
+          backgroundImage: 'url(/images/about-us.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.2,
+        }}></div>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
@@ -75,7 +81,8 @@ export default function About() {
       {/* Company Overview */}
       <section className="section-padding bg-white">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* First Row: Text and Image */}
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -104,24 +111,38 @@ export default function About() {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="grid grid-cols-2 gap-6"
+              className="flex justify-center"
             >
-              {[
-                { number: '15+', label: 'Years Experience' },
-                { number: '500+', label: 'Projects Completed' },
-                { number: '200+', label: 'Happy Clients' },
-                { number: '10+', label: 'Industries Served' },
-              ].map((stat, index) => (
-                <div
-                  key={index}
-                  className="bg-gradient-primary text-white rounded-2xl p-8 text-center transform hover:scale-105 transition-transform duration-300"
-                >
-                  <div className="text-4xl font-bold mb-2">{stat.number}</div>
-                  <div className="text-sm opacity-90">{stat.label}</div>
-                </div>
-              ))}
+              <img
+                src="/images/industrial.jpg"
+                alt="Industrial Manufacturing Facility"
+                className="rounded-2xl shadow-2xl max-w-full h-auto object-cover"
+                style={{ maxHeight: '500px' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                }}
+              />
             </motion.div>
           </div>
+
+          {/* Second Row: Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+          >
+            {STATS.map((stat, index) => (
+              <div
+                key={index}
+                className="bg-[#2c3543] rounded-xl p-6 text-center"
+              >
+                <div className="text-4xl font-bold text-accent-green mb-2">{stat.value}</div>
+                <div className="text-sm text-white">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
         </Container>
       </section>
 

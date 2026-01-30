@@ -150,12 +150,12 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center"
+                className="text-center bg-[#2c3543] rounded-xl p-6"
               >
-                <div className="text-4xl md:text-5xl font-bold text-primary-600 mb-2">
+                <div className="text-4xl md:text-5xl font-bold text-accent-green mb-2">
                   <AnimatedCounter end={parseInt(stat.value)} suffix={stat.value.replace(/[0-9]/g, '')} />
                 </div>
-                <p className="text-secondary-600 font-medium">{stat.label}</p>
+                <p className="text-white font-medium">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -208,7 +208,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <Link to="/products">
+            <Link to="/products-automation">
               <Button size="lg" icon={ArrowRight}>
                 View All Solutions
               </Button>
@@ -217,8 +217,70 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Our Clients */}
+      <section className="section-padding bg-white">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-secondary-900 mb-4">
+              Our Valued Clients
+            </h2>
+            <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
+              Trusted by leading organizations across diverse industries
+            </p>
+          </motion.div>
+
+          <div className="relative overflow-hidden py-8">
+            <div className="flex animate-slide whitespace-nowrap">
+              {/* All 18 client logos in single sequence */}
+              {[
+                'abb.jpeg', 'bharat-petroleum.jpeg', 'emerson.jpeg', 'endress-hauser.jpeg',
+                'gulshan.jpeg', 'honeywell.jpeg', 'hospital.jpeg', 'hp.jpeg',
+                'indian-oil.jpeg', 'jindal.jpeg', 'loesche.jpeg', 'mother-dairy.jpeg',
+                'ogt.jpeg', 'reliance.jpeg', 'siemens.jpeg', 'simbhaoli-sugars.jpeg',
+                'unissix.jpeg', 'voith.jpeg'
+              ].map((logo, index) => (
+                <div key={index} className="mx-8 inline-flex items-center justify-center min-w-[120px]">
+                  <img 
+                    src={`/clients/${logo}`}
+                    alt={`Client ${index + 1}`}
+                    className="h-20 max-h-20 object-contain opacity-80 hover:opacity-100 transition-opacity duration-300 filter drop-shadow-sm"
+                    onError={(e) => {
+                      console.error(`Failed to load image: /clients/${logo}`);
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                  />
+                </div>
+              ))}
+              
+              {/* Invisible duplicate for seamless restart */}
+              {[
+                'abb.jpeg', 'bharat-petroleum.jpeg', 'emerson.jpeg', 'endress-hauser.jpeg',
+                'gulshan.jpeg', 'honeywell.jpeg', 'hospital.jpeg', 'hp.jpeg',
+                'indian-oil.jpeg', 'jindal.jpeg', 'loesche.jpeg', 'mother-dairy.jpeg',
+                'ogt.jpeg', 'reliance.jpeg', 'siemens.jpeg', 'simbhaoli-sugars.jpeg',
+                'unissix.jpeg', 'voith.jpeg'
+              ].map((logo, index) => (
+                <div key={`invisible-${index}`} className="mx-8 inline-flex items-center justify-center min-w-[120px] invisible">
+                  <img 
+                    src={`/clients/${logo}`}
+                    alt={`Client ${index + 1}`}
+                    className="h-16 max-h-16 object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* Schneider Electric Badge */}
-      <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
+      {/* <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
@@ -264,7 +326,7 @@ export default function Home() {
             </div>
           </div>
         </Container>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="section-padding bg-secondary-900 text-white">
@@ -288,11 +350,11 @@ export default function Home() {
                     Get in Touch
                   </Button>
                 </Link>
-                <Link to="/projects">
+                {/* <Link to="/projects">
                   <Button variant="outline" size="lg" className="!text-white !border-white hover:!bg-white hover:!text-secondary-900">
                     View Projects
                   </Button>
-                </Link>
+                </Link> */}
               </div>
             </motion.div>
           </div>

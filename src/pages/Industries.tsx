@@ -33,6 +33,32 @@ export default function Industries() {
         </Container>
       </section>
 
+      {/* Industries Image Section */}
+      <section className="py-16 bg-gray-50">
+        <Container>
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="md:w-1/2">
+              <img 
+                src="/images/industries.png" 
+                alt="Industries We Serve"
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
+            </div>
+            <div className="md:w-1/2">
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-secondary-900 mb-6">
+                Industries We Serve
+              </h2>
+              <p className="text-xl text-secondary-600 leading-relaxed mb-6">
+                Trusted partner across diverse industrial sectors
+              </p>
+              <p className="text-secondary-600 leading-relaxed">
+                We have established ourselves as a reliable partner across various industrial domains, delivering cutting-edge automation solutions tailored to meet the unique challenges of each sector. Our expertise spans multiple industries where precision, reliability, and innovation are paramount.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* Industries Grid */}
       <section className="section-padding bg-white">
         <Container>
@@ -57,48 +83,46 @@ export default function Industries() {
         </Container>
       </section>
 
-      {/* Key Clients */}
-      <section className="section-padding" style={{ background: 'linear-gradient(135deg, #1a2332 0%, #0f1a2b 100%)' }}>
+      {/* Our Clients */}
+      <section className="section-padding bg-white">
         <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
-                Trusted by Leading Organizations
-              </h2>
-              <p className="text-xl mb-12 text-white" style={{ opacity: 0.9 }}>
-                Serving India's top industrial and infrastructure companies
-              </p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-secondary-900 mb-4">
+              Trusted by Leading Organizations
+            </h2>
+            <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
+              Serving India's top industrial and infrastructure companies
+            </p>
+          </motion.div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                  <p className="text-lg font-semibold text-white">HPCL</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                  <p className="text-lg font-semibold text-white">IOCL</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                  <p className="text-lg font-semibold text-white">BPCL</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                  <p className="text-lg font-semibold text-white">Reliance Industries</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                  <p className="text-lg font-semibold text-white">Leading Hospitals</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                  <p className="text-lg font-semibold text-white">Cement Plants</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                  <p className="text-lg font-semibold text-white">Sugar Mills</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                  <p className="text-lg font-semibold text-white">Infrastructure Projects</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                  <p className="text-lg font-semibold text-white">Government Bodies</p>
-                </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {[
+              'abb.jpeg', 'bharat-petroleum.jpeg', 'emerson.jpeg', 'endress-hauser.jpeg',
+              'gulshan.jpeg', 'honeywell.jpeg', 'hospital.jpeg', 'hp.jpeg',
+              'indian-oil.jpeg', 'jindal.jpeg', 'loesche.jpeg', 'mother-dairy.jpeg',
+              'ogt.jpeg', 'reliance.jpeg', 'siemens.jpeg', 'simbhaoli-sugars.jpeg',
+              'unissix.jpeg', 'voith.jpeg'
+            ].map((logo, index) => (
+              <div 
+                key={index} 
+                className="flex items-center justify-center p-4 bg-gray-50 rounded-xl border border-gray-200 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+              >
+                <img 
+                  src={`/clients/${logo}`}
+                  alt={`Client ${index + 1}`}
+                  className="h-16 max-h-16 object-contain w-full"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                  }}
+                />
               </div>
-            </div>
+            ))}
           </div>
         </Container>
       </section>

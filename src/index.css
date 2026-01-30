@@ -43,6 +43,10 @@
     background: linear-gradient(135deg, #0059e6 0%, #003580 100%);
   }
 
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #0059e6 0%, #003580 100%);
+  }
+
   .gradient-secondary {
     background: linear-gradient(135deg, #334e68 0%, #102a43 100%);
   }
@@ -89,5 +93,18 @@
   
   .animation-delay-600 {
     animation-delay: 600ms;
+  }
+  
+  .animate-slide {
+    animation: slide 15s linear infinite;
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 }

@@ -14,21 +14,18 @@ export const COMPANY = {
 export const NAV_ITEMS = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
-  { label: 'Products', path: '/products' },
-  { label: 'Automation', path: '/automation' },
-  { label: 'Contracting', path: '/contracting' },
+  { label: 'Products & Automation', path: '/products-automation' },
+  { label: 'Training & Education', path: '/contracting' },
   { label: 'Industries', path: '/industries' },
-  { label: 'Projects', path: '/projects' },
-  { label: 'Facility', path: '/facility' },
   { label: 'Leadership', path: '/leadership' },
   { label: 'Contact', path: '/contact' },
 ];
 
 // Statistics
 export const STATS = [
-  { value: '500+', label: 'Projects Executed' },
   { value: '15+', label: 'Years Experience' },
-  { value: '200+', label: 'Industrial Clients' },
+  { value: '500+', label: 'Projects Completed' },
+  { value: '200+', label: 'Happy Clients' },
   { value: '10+', label: 'Industries Served' },
 ];
 
