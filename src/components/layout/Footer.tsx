@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, ChevronRight, Globe, Building2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, ChevronRight, Globe, Building2, Wrench, Cpu, Zap, Building, Network, Home, Info, Settings, Users, Briefcase, User } from 'lucide-react';
 import { COMPANY, NAV_ITEMS } from '@/constants';
 import Container from '../ui/Container';
 
@@ -14,9 +14,9 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex justify-center md:justify-start">
               <Link to="/" className="block transition-transform duration-300 hover:scale-105">
-                <img 
-                  src="/assets/oxy-logo.png" 
-                  alt="OXY Technologies Logo" 
+                <img
+                  src="/assets/oxy-logo.png"
+                  alt="OXY Technologies Logo"
                   className="h-32 w-auto"
                 />
               </Link>
@@ -36,42 +36,64 @@ export default function Footer() {
               <span>Quick Links</span>
             </h4>
             <ul className="space-y-3">
-              {NAV_ITEMS.slice(0, 5).map((item) => (
-                <li key={item.path}>
-                  <Link
-                    to={item.path}
-                    className="flex items-center text-secondary-700 hover:text-accent-green transition-colors duration-300 group"
-                  >
-                    <ChevronRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" />
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {NAV_ITEMS.slice(0, 5).map((item) => {
+                // Map each navigation item to an appropriate icon
+                const getIcon = () => {
+                  switch (item.label) {
+                    case 'Home': return Home;
+                    case 'About Us': return Info;
+                    case 'Products & Automation': return Settings;
+                    case 'Training & Education': return User;
+                    case 'Industries': return Building2;
+                    case 'Leadership': return Users;
+                    case 'Contact': return Mail;
+                    default: return Globe;
+                  }
+                };
+
+                const IconComponent = getIcon();
+
+                return (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="flex items-center text-secondary-700 hover:text-accent-green transition-colors duration-300 group"
+                    >
+                      <IconComponent className="w-4 h-4 mr-2 text-accent-green" />
+                      <span>{item.label}</span>
+                      <ChevronRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" />
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-lg font-bold mb-6 text-secondary-900">Our Services</h4>
+            <h4 className="text-lg font-bold mb-6 flex items-center space-x-2 text-secondary-900">
+              <Wrench className="w-5 h-5 text-accent-green" />
+              <span>Our Services</span>
+            </h4>
             <ul className="space-y-3 text-secondary-700">
               <li className="flex items-center space-x-2">
-                <div className="w-1.5 h-1.5 bg-accent-green rounded-full"></div>
+                <Building className="w-4 h-4 text-accent-green" />
                 <span>Panel Manufacturing</span>
               </li>
               <li className="flex items-center space-x-2">
-                <div className="w-1.5 h-1.5 bg-accent-green rounded-full"></div>
+                <Cpu className="w-4 h-4 text-accent-green" />
                 <span>PLC & SCADA Solutions</span>
               </li>
               <li className="flex items-center space-x-2">
-                <div className="w-1.5 h-1.5 bg-accent-green rounded-full"></div>
+                <Zap className="w-4 h-4 text-accent-green" />
                 <span>VFD Systems</span>
               </li>
               <li className="flex items-center space-x-2">
-                <div className="w-1.5 h-1.5 bg-accent-green rounded-full"></div>
+                <Building2 className="w-4 h-4 text-accent-green" />
                 <span>Turnkey Projects</span>
               </li>
               <li className="flex items-center space-x-2">
-                <div className="w-1.5 h-1.5 bg-accent-green rounded-full"></div>
+                <Network className="w-4 h-4 text-accent-green" />
                 <span>System Integration</span>
               </li>
             </ul>
@@ -79,7 +101,10 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-bold mb-6 text-secondary-900">Contact Us</h4>
+            <h4 className="text-lg font-bold mb-6 flex items-center space-x-2 text-secondary-900">
+              <Phone className="w-5 h-5 text-accent-green" />
+              <span>Contact Us</span>
+            </h4>
             <ul className="space-y-5">
               <li className="flex items-start space-x-3">
                 <div className="mt-0.5 p-2 bg-blue-600 rounded-lg">

@@ -89,8 +89,8 @@ export default function ProductsAutomation() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {PRODUCTS.map((product) => (
-              <Card key={product.id} className="group cursor-pointer" hover={true}>
-                <div className="mb-6">
+              <Card key={product.id} className="group cursor-pointer flex flex-col h-full" hover={true}>
+                <div className="mb-6 flex-grow">
                   <div className="w-full h-48 rounded-xl overflow-hidden mb-4 group-hover:scale-105 transition-transform duration-300">
                     <img 
                       src={`/images/${product.id === 'pcc' ? 'PCC.png' : product.id === 'mcc' ? 'MCC.png' : product.id === 'plc-imcc' ? 'PLC & IMCC Panels.png' : product.id === 'vfd' ? 'VFD Panels.png' : product.id === 'apfc' ? 'APFC Panels.png' : product.id === 'busduct' ? 'Bus Ducts & Rising Mains.png' : 'placeholder.jpg'}`}
@@ -123,7 +123,7 @@ export default function ProductsAutomation() {
                 <Button
                   onClick={() => setSelectedProduct(product)}
                   variant="outline"
-                  className="w-full"
+                  className="w-full mt-auto"
                 >
                   View Details
                 </Button>
