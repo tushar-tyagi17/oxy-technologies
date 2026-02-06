@@ -50,7 +50,7 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Link to="/products">
+                <Link to="/products-automation">
                   <Button size="lg" icon={ArrowRight}>
                     Explore Solutions
                   </Button>
@@ -245,7 +245,7 @@ export default function Home() {
                 'unissix.jpeg', 'voith.jpeg'
               ].map((logo, index) => (
                 <div key={index} className="mx-8 inline-flex items-center justify-center min-w-[120px]">
-                  <img 
+                  <img
                     src={`/clients/${logo}`}
                     alt={`Client ${index + 1}`}
                     className="h-20 max-h-20 object-contain opacity-80 hover:opacity-100 transition-opacity duration-300 filter drop-shadow-sm"
@@ -257,7 +257,7 @@ export default function Home() {
                   />
                 </div>
               ))}
-              
+
               {/* Invisible duplicate for seamless restart */}
               {[
                 'abb.jpeg', 'bharat-petroleum.jpeg', 'emerson.jpeg', 'endress-hauser.jpeg',
@@ -267,7 +267,7 @@ export default function Home() {
                 'unissix.jpeg', 'voith.jpeg'
               ].map((logo, index) => (
                 <div key={`invisible-${index}`} className="mx-8 inline-flex items-center justify-center min-w-[120px] invisible">
-                  <img 
+                  <img
                     src={`/clients/${logo}`}
                     alt={`Client ${index + 1}`}
                     className="h-16 max-h-16 object-contain"
