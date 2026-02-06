@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Home, Users, Zap, GraduationCap, Building2, User, Phone } from 'lucide-react';
-import { NAV_ITEMS } from '@/constants';
 import Container from '../ui/Container';
 
 interface NavItemProps {
@@ -15,11 +14,10 @@ interface NavItemProps {
 const NavItem = ({ to, label, icon: Icon, currentPath }: NavItemProps) => (
   <Link
     to={to}
-    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-      currentPath === to
+    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${currentPath === to
         ? 'bg-primary-600 text-white shadow-md'
         : 'text-secondary-700 hover:bg-primary-50 hover:text-primary-600 hover:shadow-sm'
-    }`}
+      }`}
   >
     <Icon className="w-4 h-4" />
     {label}
@@ -29,11 +27,10 @@ const NavItem = ({ to, label, icon: Icon, currentPath }: NavItemProps) => (
 const MobileNavItem = ({ to, label, icon: Icon, currentPath }: NavItemProps) => (
   <Link
     to={to}
-    className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
-      currentPath === to
+    className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 ${currentPath === to
         ? 'bg-primary-600 text-white shadow-md'
         : 'text-secondary-700 hover:bg-primary-50 hover:text-primary-600 hover:shadow-sm'
-    }`}
+      }`}
   >
     <Icon className="w-5 h-5" />
     {label}
@@ -59,65 +56,64 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? 'bg-white/95 backdrop-blur-md shadow-medium'
           : 'bg-transparent'
-      }`}
+        }`}
     >
       <Container>
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <img 
-              src="/assets/oxy-logo.png" 
-              alt="OXY Technologies Logo" 
+            <img
+              src="/assets/oxy-logo.png"
+              alt="OXY Technologies Logo"
               className="h-20 w-auto md:h-24 lg:h-28 transform group-hover:scale-105 transition-transform duration-300"
             />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-right space-x-1">
-            <NavItem 
-              to="/" 
-              label="Home" 
-              icon={Home} 
+            <NavItem
+              to="/"
+              label="Home"
+              icon={Home}
               currentPath={location.pathname}
             />
-            <NavItem 
-              to="/about" 
-              label="About Us" 
-              icon={Users} 
+            <NavItem
+              to="/about"
+              label="About Us"
+              icon={Users}
               currentPath={location.pathname}
             />
-            <NavItem 
-              to="/products-automation" 
-              label="Products & Automation" 
-              icon={Zap} 
+            <NavItem
+              to="/products-automation"
+              label="Products & Automation"
+              icon={Zap}
               currentPath={location.pathname}
             />
-            <NavItem 
-              to="/contracting" 
-              label="Training & Education" 
-              icon={GraduationCap} 
+            <NavItem
+              to="/contracting"
+              label="Training & Education"
+              icon={GraduationCap}
               currentPath={location.pathname}
             />
-            <NavItem 
-              to="/industries" 
-              label="Industries" 
-              icon={Building2} 
+            <NavItem
+              to="/industries"
+              label="Industries"
+              icon={Building2}
               currentPath={location.pathname}
             />
-            <NavItem 
-              to="/leadership" 
-              label="Leadership" 
-              icon={User} 
+            <NavItem
+              to="/leadership"
+              label="Leadership"
+              icon={User}
               currentPath={location.pathname}
             />
-            <NavItem 
-              to="/contact" 
-              label="Contact" 
-              icon={Phone} 
+            <NavItem
+              to="/contact"
+              label="Contact"
+              icon={Phone}
               currentPath={location.pathname}
             />
           </div>
@@ -148,46 +144,46 @@ export default function Header() {
           >
             <Container>
               <div className="py-4 space-y-2">
-                <MobileNavItem 
-                  to="/" 
-                  label="Home" 
-                  icon={Home} 
+                <MobileNavItem
+                  to="/"
+                  label="Home"
+                  icon={Home}
                   currentPath={location.pathname}
                 />
-                <MobileNavItem 
-                  to="/about" 
-                  label="About Us" 
-                  icon={Users} 
+                <MobileNavItem
+                  to="/about"
+                  label="About Us"
+                  icon={Users}
                   currentPath={location.pathname}
                 />
-                <MobileNavItem 
-                  to="/products-automation" 
-                  label="Products & Automation" 
-                  icon={Zap} 
+                <MobileNavItem
+                  to="/products-automation"
+                  label="Products & Automation"
+                  icon={Zap}
                   currentPath={location.pathname}
                 />
-                <MobileNavItem 
-                  to="/contracting" 
-                  label="Training & Education" 
-                  icon={GraduationCap} 
+                <MobileNavItem
+                  to="/contracting"
+                  label="Training & Education"
+                  icon={GraduationCap}
                   currentPath={location.pathname}
                 />
-                <MobileNavItem 
-                  to="/industries" 
-                  label="Industries" 
-                  icon={Building2} 
+                <MobileNavItem
+                  to="/industries"
+                  label="Industries"
+                  icon={Building2}
                   currentPath={location.pathname}
                 />
-                <MobileNavItem 
-                  to="/leadership" 
-                  label="Leadership" 
-                  icon={User} 
+                <MobileNavItem
+                  to="/leadership"
+                  label="Leadership"
+                  icon={User}
                   currentPath={location.pathname}
                 />
-                <MobileNavItem 
-                  to="/contact" 
-                  label="Contact" 
-                  icon={Phone} 
+                <MobileNavItem
+                  to="/contact"
+                  label="Contact"
+                  icon={Phone}
                   currentPath={location.pathname}
                 />
               </div>

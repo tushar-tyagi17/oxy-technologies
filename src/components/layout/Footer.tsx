@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, ChevronRight, Globe, Building2, Wrench, Cpu, Zap, Building, Network, Home, Info, Settings, Users, Briefcase, User } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, ChevronRight, Globe, Building2, Wrench, Cpu, Zap, Building, Network, Home, Info, Settings, Users, User } from 'lucide-react';
 import { COMPANY, NAV_ITEMS } from '@/constants';
 import Container from '../ui/Container';
 
